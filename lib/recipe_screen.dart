@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:project_1/main.dart';
+import 'package:project_1/model/recipe.dart';
+import 'package:project_1/recipe_screen_details.dart';
+
 
 class RecipeScreen extends StatefulWidget {
   const RecipeScreen({Key? key}) : super(key: key);
@@ -10,15 +13,15 @@ class RecipeScreen extends StatefulWidget {
 
 class _RecipeScreenState extends State<RecipeScreen> {
 
-  List imageFilters = ['popular.png', 'healthy.png', 'breakfast.png', 'lunch.png', 'snack.png', 'dinner.png'];
-  List filterText = ['Popular', 'Healthy', 'Breakfast', 'Lunch', 'Snack', 'Dinner'];
-
-  List imageRecipes = ['burger.png', 'burrito.png', 'brocoli.png', 'french.png'];
-  List recipeName = ['Smash Burger', 'Black Bean Burrito', 'Broccoli Salad', 'Baked French Toast'];
-  List recipeDescription = ['1', '2', '3', '4'];
+  final List<String> filterText = ['Popular', 'Healthy', 'Breakfast', 'Lunch', 'Snack', 'Dinner'];
+  List<String> selectedFilter = [];
 
   @override 
   Widget build(BuildContext context) {
+    final filterRecipe = recipeList.where((recipe) {
+      return selectedFilter.isEmpty || selectedFilter.contains(recipe.filter);
+    }).toList();
+
     return  SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -37,61 +40,73 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       Text('Joshua', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
                     ],
                   ),
+                  Row(
+                    children: [
+                      Image.asset('assets/logo.png', height: 100, width: 80),
+                      Text('Recipe Browse', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+                    ],
+                  ),
                   ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
                     child: GestureDetector(
                       onTap: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: "Recipe App")));
                       }, 
-                      child: Image.asset('assets/profile.png', height: 80, width: 80,),
+                      //actually i think i want to change this to home button image which takes you back to main page.
+                      child: Image.asset('assets/house-64.png', height: 100, width: 100,),
                     )
                   ),
                 ],
               ),
             ),
-            
             Padding(
-              padding: EdgeInsets.only(left: 15.0),
-              child: SizedBox(
-                height: 40.0,
-                child: ListView.separated(
+              padding: EdgeInsets.only(left: 15.0, right: 15.0),
+              child: Container(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  separatorBuilder: 
-                    (BuildContext context, int index)  {
-                      return const SizedBox(
-                        width: 15,
-                      );
-                    },
-                  itemCount: imageFilters.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ), 
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: Row(
-                          children: [
-                            Image.asset('assets/${imageFilters[index]}', height: 30.0, width: 30.0,),
-                            const SizedBox( width: 10.0,),
-                            Text(filterText[index], style: TextStyle(color: Colors.white, fontSize: 16,),),
-                          ]
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: filterText.map((filter) => Row(
+                      children: [
+                        FilterChip(
+                          selected: selectedFilter.contains(filter),
+                          label: Text(filter, style: TextStyle(color: Colors.white)),
+                          checkmarkColor: Colors.white,
+                          onSelected: (selected) {
+                            setState(() {
+                              if (selected) {
+                                selectedFilter.add(filter);
+                              } else {
+                                selectedFilter.remove(filter);
+                              }
+                            });
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            side: BorderSide(
+                              color: selectedFilter.contains(filter) ? Colors.yellow.shade200 : Colors.grey,
+                              width: 2.0,
+                            ),
+                          ),
+                          backgroundColor: Color(0xff18181A),
+                          selectedColor: Color(0xff18181A),
                         ),
-                      ),
-                    );
-                  },
+                        SizedBox(width: 10.0), // Adjust the width as needed for separation
+                      ],
+                    )).toList(),
+                  ),
                 ),
               ),
             ),
+
+
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //potential search bar
                   Text('Available Recipes:', style: TextStyle(color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.bold),),
-                  Image.asset('assets/list.png', height: 35.0, width: 35.0),
                 ]
               ),
             ),
@@ -106,16 +121,17 @@ class _RecipeScreenState extends State<RecipeScreen> {
                         height: 10.0,
                     );
                   },
-                  itemCount: imageRecipes.length,
+                  itemCount: filterRecipe.length,
                   itemBuilder: (context, index) {
+                    final recipe = filterRecipe[index];
                     return GestureDetector(
                       onTap: () {
-                        /*Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return RecipeDetailScreen(image: 'assets/${imageRecipes[index]}', name: recipeName[index],
-                            about: about[index], ingredients: ingredients[index],
-                            steps: steps[index],
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return RecipeDetailScreen(image: 'assets/${recipe.recipeImage}', name: recipe.name,
+                            about: recipe.recipeInfo, ingredients: recipe.recipeIngredients,
+                            steps: recipe.recipeSteps, macros: recipe.recipeMacros,
                           );
-                        }));*/
+                        }));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -126,7 +142,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                           padding: const EdgeInsets.only(left: 5.0, right: 10.0),
                           child: Row(
                             children: [
-                              Image.asset('assets/${imageRecipes[index]}', height: 150.0, width: 150.0),
+                              Image.asset('assets/${recipe.recipeImage}', height: 150.0, width: 150.0),
                               const SizedBox(width: 10.0),
                               Expanded(
                                 child: Column(
@@ -134,15 +150,15 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text('650g', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
+                                        Text(recipe.recipeMacros[0] + ' mins', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
                                         SizedBox(width: 20,),
-                                        Text('799cal', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
+                                        Text(recipe.recipeMacros[1] + 'cals', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
                                       ],
                                     ),
                                     const SizedBox(height: 5),
-                                    Text(recipeName[index], style: TextStyle(color: Colors.white, fontSize: 20), maxLines: 2,),
+                                    Text(recipe.name, style: TextStyle(color: Colors.white, fontSize: 20), maxLines: 2,),
                                     const SizedBox(height: 5),
-                                    Text(recipeDescription[index], style: TextStyle(color: Colors.blueGrey, fontSize: 13), maxLines: 2,)
+                                    Text(recipe.recipeDesc, style: TextStyle(color: Colors.blueGrey, fontSize: 13), maxLines: 2,)
                                   ],
                                 ),
                               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/recipe_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipe App',
       theme: ThemeData(
-
+        textTheme: GoogleFonts.oswaldTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
