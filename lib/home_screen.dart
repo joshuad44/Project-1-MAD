@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'recipe_screen.dart';
 import 'settings_screen.dart';
+import 'grocery_list_screen.dart'; // Import the GroceryListScreen
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -54,6 +55,13 @@ class HomeScreen extends StatelessWidget {
             if (label == 'Recipes') {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => RecipeScreen()));
+            } else if (label == 'Grocery List') {
+              // Corrected condition for Grocery List
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          GroceryListScreen())); // Navigate to GroceryListScreen
             } else if (label == 'Settings') {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SettingsScreen()));
