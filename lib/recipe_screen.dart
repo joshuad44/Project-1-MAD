@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_1/main.dart';
+import 'package:project_1/home_screen.dart';
 import 'package:project_1/model/recipe.dart';
 import 'package:project_1/recipe_screen_details.dart';
 
@@ -50,7 +50,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: "Recipe App")));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                       }, 
                       //actually i think i want to change this to home button image which takes you back to main page.
                       child: Image.asset('assets/house-64.png', height: 100, width: 100,),
