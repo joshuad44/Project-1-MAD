@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:project_1/model/change_notifier.dart';
 
 class RecipeDetailScreen extends StatefulWidget{
   RecipeDetailScreen(
@@ -25,6 +27,8 @@ class RecipeDetailScreen extends StatefulWidget{
 class _RecipeDetailScreen extends State<RecipeDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    var mealPlanModel = Provider.of<MealPlanModel>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar:  AppBar(
@@ -70,7 +74,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                         Column(
                           children: [
                             Text(
-                              widget.macros[1],
+                              widget.macros[1].toString(),
                               style: TextStyle(
                                 color: Colors.yellow.shade200,
                                 fontWeight: FontWeight.bold,
@@ -84,7 +88,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                         Column(
                           children: [
                             Text(
-                              widget.macros[2],
+                              widget.macros[2].toString(),
                               style: TextStyle(
                                 color: Colors.yellow.shade200,
                                 fontWeight: FontWeight.bold,
@@ -98,7 +102,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                         Column(
                           children: [
                             Text(
-                              widget.macros[3],
+                              widget.macros[3].toString(),
                               style: TextStyle(
                                 color: Colors.yellow.shade200,
                                 fontWeight: FontWeight.bold,
@@ -112,7 +116,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                         Column(
                           children: [
                             Text(
-                              widget.macros[4],
+                              widget.macros[4].toString(),
                               style: TextStyle(
                                 color: Colors.yellow.shade200,
                                 fontWeight: FontWeight.bold,
@@ -170,7 +174,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: Text(
                   widget.about,
                   style: TextStyle(color: Colors.white, fontSize: 14),
@@ -178,7 +182,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 10, bottom: 5),
                 child: MaterialButton(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                   minWidth: MediaQuery.of(context).size.width,
@@ -197,7 +201,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 5),
                 child: MaterialButton(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                   minWidth: MediaQuery.of(context).size.width,
@@ -205,6 +209,7 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                   color: Colors.yellow.shade200,
                   onPressed: () {
                     //add to meal plan
+                    mealPlanModel.addToMealPlan(widget.macros, widget.name);
                   },
                   child: Center(
                     child: Text(

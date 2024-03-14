@@ -16,11 +16,24 @@ class _RecipeScreenState extends State<RecipeScreen> {
   final List<String> filterText = ['Popular', 'Healthy', 'Breakfast', 'Lunch', 'Snack', 'Dinner'];
   List<String> selectedFilter = [];
 
+  final TextEditingController _searchController = TextEditingController();
+
   @override 
   Widget build(BuildContext context) {
+    List<Recipe> filteredRecipeList = [];
+    
+    recipeList.shuffle();
     final filterRecipe = recipeList.where((recipe) {
       return selectedFilter.isEmpty || selectedFilter.contains(recipe.filter);
     }).toList();
+
+    if (_searchController.text.isNotEmpty) {
+      filteredRecipeList = filterRecipe.where((recipe) {
+        return recipe.name.toLowerCase().contains(_searchController.text.toLowerCase());
+      }).toList();
+    } else {
+      filteredRecipeList = List.from(filterRecipe);
+    }
 
     return  SafeArea(
       child: Scaffold(
@@ -28,7 +41,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
         body: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.only(left: 20, right: 20,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -42,7 +55,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                   ),
                   Row(
                     children: [
-                      Image.asset('assets/logo.png', height: 100, width: 80),
+                      //Image.asset('assets/logo.png', height: 100, width: 80),
                       Text('Recipe Browse', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
                     ],
                   ),
@@ -99,14 +112,39 @@ class _RecipeScreenState extends State<RecipeScreen> {
               ),
             ),
 
-
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  //potential search bar
                   Text('Available Recipes:', style: TextStyle(color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.bold),),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      style: TextStyle(color: Colors.white),
+                      onChanged: (value) {
+                        setState(() {}); 
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Search recipes...',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.yellow.shade200),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                      ),
+                    ),
+                  ), 
                 ]
               ),
             ),
@@ -121,9 +159,9 @@ class _RecipeScreenState extends State<RecipeScreen> {
                         height: 10.0,
                     );
                   },
-                  itemCount: filterRecipe.length,
+                  itemCount: filteredRecipeList.length,
                   itemBuilder: (context, index) {
-                    final recipe = filterRecipe[index];
+                    final recipe = filteredRecipeList[index];
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -150,9 +188,9 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text(recipe.recipeMacros[0] + ' mins', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
+                                        Text(recipe.recipeMacros[0].toString() + ' mins', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
                                         SizedBox(width: 20,),
-                                        Text(recipe.recipeMacros[1] + 'cals', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
+                                        Text(recipe.recipeMacros[1].toString() + 'cals', style: TextStyle(color: Colors.yellow.shade200, fontSize: 14.0)),
                                       ],
                                     ),
                                     const SizedBox(height: 5),

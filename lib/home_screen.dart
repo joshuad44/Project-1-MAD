@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/meal_planning_screen.dart';
 import 'recipe_screen.dart';
 import 'settings_screen.dart';
 import 'grocery_list_screen.dart'; // Import the GroceryListScreen
@@ -65,8 +66,10 @@ class HomeScreen extends StatelessWidget {
             } else if (label == 'Settings') {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SettingsScreen()));
-            } else {
+            } else if (label == 'Meal Planning') {
               // Implement navigation logic for other screens
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MealPlanningScreen()));
             }
           },
         ),
