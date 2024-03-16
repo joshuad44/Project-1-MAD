@@ -11,5 +11,5 @@ class SettingsScreen extends StatelessWidget {
         child: Text('Settings Screen'),
       ),
     );
-  }
+  } //
 }
