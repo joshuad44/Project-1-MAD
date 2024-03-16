@@ -182,25 +182,6 @@ class _RecipeDetailScreen extends State<RecipeDetailScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20,top: 10, bottom: 5),
-                child: MaterialButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                  minWidth: MediaQuery.of(context).size.width,
-                  height: 30.0,
-                  color: Colors.yellow.shade200,
-                  onPressed: () {
-                    //add to grocery list
-                  },
-                  child: Center(
-                    child: Text(
-                      'Add to Grocery List',
-                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20,top: 5),
                 child: MaterialButton(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),

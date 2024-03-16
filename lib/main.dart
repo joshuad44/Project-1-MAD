@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Recipe App',
       theme: ThemeData(
         textTheme: GoogleFonts.oswaldTextTheme(),
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       home: HomeScreen(),
     );

@@ -38,40 +38,17 @@ class _RecipeScreenState extends State<RecipeScreen> {
     return  SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          title: Text(
+            'Recipe Browse',
+            style: TextStyle(color: Colors.white),
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
         body: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 20, right: 20,),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hello', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-                      SizedBox(height: 5.0,),
-                      Text('Joshua', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      //Image.asset('assets/logo.png', height: 100, width: 80),
-                      Text('Recipe Browse', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-                    ],
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-                      }, 
-                      //actually i think i want to change this to home button image which takes you back to main page.
-                      child: Image.asset('assets/house-64.png', height: 100, width: 100,),
-                    )
-                  ),
-                ],
-              ),
-            ),
             Padding(
               padding: EdgeInsets.only(left: 15.0, right: 15.0),
               child: Container(
@@ -117,7 +94,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Available Recipes:', style: TextStyle(color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.bold),),
+                  Text('Available Recipes:', style: TextStyle(color: Colors.white, fontSize: 22.0),),
                   const SizedBox(width: 10.0),
                   Expanded(
                     child: TextField(

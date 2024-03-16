@@ -183,7 +183,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                   children: [
                     SizedBox(height: 10),
                     TextField(
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Goal Calories (g)',
                         focusedBorder: OutlineInputBorder(
@@ -207,7 +206,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                     ),
                     SizedBox(height: 10),
                     TextField(
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Goal Fats (g)',
                         focusedBorder: OutlineInputBorder(
@@ -231,7 +229,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                     ),
                     SizedBox(height: 10),
                     TextField(
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Goal Carbs (g)',
                         focusedBorder: OutlineInputBorder(
@@ -255,7 +252,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                     ),
                     SizedBox(height: 10),
                     TextField(
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Goal Protein (g)',
                         focusedBorder: OutlineInputBorder(
@@ -339,7 +335,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                     children: [
                       SizedBox(height: 10),
                       TextFormField(
-                        keyboardType: TextInputType.text, // Use TextInputType.text for text input
                         decoration: InputDecoration(
                           labelText: 'Food Name',
                           focusedBorder: OutlineInputBorder(
@@ -366,7 +361,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                       ),
                       SizedBox(height: 10),
                       TextField(
-                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Food Calories',
                           focusedBorder: OutlineInputBorder(
@@ -389,7 +383,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                       ),
                       SizedBox(height: 10),
                       TextField(
-                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Food Fats (g)',
                           focusedBorder: OutlineInputBorder(
@@ -412,7 +405,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                       ),
                       SizedBox(height: 10),
                       TextField(
-                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Food Carbs (g)',
                           focusedBorder: OutlineInputBorder(
@@ -435,7 +427,6 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
                       ),
                       SizedBox(height: 10),
                       TextField(
-                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Food Protein (g)',
                           focusedBorder: OutlineInputBorder(
