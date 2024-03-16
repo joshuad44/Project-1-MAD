@@ -486,6 +486,7 @@ class _MealPlanningScreenState extends State<MealPlanningScreen> {
     var mealPlanModel = Provider.of<MealPlanModel>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
